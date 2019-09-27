@@ -167,7 +167,19 @@ Note that full exchangeability $\implies$ exchangeability $\implies$ mean exchan
 
 \noindent \textbf{Remark:} Randomized control trials produce exchangeability implying that association is equivalent to causation. To see this: By consistency assumption, we have $\pp (Y = 1 | A = 1) = \pp(Y^{a=1} = 1 | A = 1)$. Furthermore, by randomization we have exchangeability so $\pp(Y^{a=1} = 1 | A = 1) = \pp(Y^{a=1} = 1)$. Hence we have $\pp (Y = 1 | A = 1) = \pp(Y^{a=1} = 1)$, where the LHS can we estimated with the observed data. Likewise, a similar argument can be used to show that $\pp (Y = 1 | A = 0) = \pp(Y^{a=0} = 1)$.
 
+\subsection{Inverse probability weighting estimators}
 
+Define $f(a | l)$ to be the conditional probability distribution of $A | L$. Then:
+
+\begin{equation}
+\begin{aligned}
+\EE \left( \frac{ I(A=a) Y}{ f(A|L) } \right)  &= \EE \left( \EE \left( \frac{ I(A=a) Y}{ f(A|L) } | A,L \right) \right) \\
+&= \sum_l \sum_{a'} \EE \left( \frac{ I(A=a) Y}{ f(a'|l) } | A = a', L = l \right) \pp (A = a' | L = l) \pp(L = l) \\
+&= \sum_l \sum_{a'} \EE \left( \frac{ I(A=a) Y}{ f(a'|l) } | A = a', L = l \right) f(a' | l) \pp(L = l), \text{ by definition} \\
+&= \sum_l \EE(Y| A=a, L = l' ) \pp(L = l') \\
+&= \EE(Y^{A=a}), \text{ by the adjustment formula }
+\end{aligned}
+\end{equation}
 
 
 
